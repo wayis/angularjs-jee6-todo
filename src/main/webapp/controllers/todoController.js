@@ -1,10 +1,11 @@
 angular.module('todoApp').controller('TodosListCtrl', ['$scope', '$http', 'TodoServices', function ($scope, $http, TodoServices) {
     $scope.todos = [];
 
-    TodoServices.list(function(todos) {
+    var refreshList = function() {
+        TodoServices.list(function(todos) {
         $scope.todos = todos;
-
-    });
+    })};
+    refreshList();
 
     $scope.total = function() {
         return $scope.todos.length;
@@ -17,8 +18,10 @@ angular.module('todoApp').controller('TodosListCtrl', ['$scope', '$http', 'TodoS
     };
 
     $scope.add= function() {
-        $scope.todos.push({'name': this.text, 'done': false});
-        this.text = "";
+        TodoServices.create(this.name, function() {
+            refreshList();
+            this.name = "";
+        });
     };
 
     $scope.mark = function() {
