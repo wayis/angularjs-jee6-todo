@@ -1,11 +1,10 @@
-var todoControllers = angular.module('todoControllers', []);
+angular.module('todoApp').controller('TodosListCtrl', ['$scope', '$http', 'TodoServices', function ($scope, $http, TodoServices) {
+    $scope.todos = [];
 
-todoControllers.controller('TodosListCtrl', function ($scope, $http) {
-    $scope.todos = [
-        {'name': 'Task 1', 'done': true},
-        {'name': 'Task 2', 'done': false},
-        {'name': 'Task 3', 'done': false}
-    ];
+    TodoServices.list(function(todos) {
+        $scope.todos = todos;
+
+    });
 
     $scope.total = function() {
         return $scope.todos.length;
@@ -32,4 +31,4 @@ todoControllers.controller('TodosListCtrl', function ($scope, $http) {
         });
 
     };
-});
+}]);
