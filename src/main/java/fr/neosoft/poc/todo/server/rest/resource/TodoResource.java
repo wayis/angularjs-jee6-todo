@@ -1,5 +1,6 @@
 package fr.neosoft.poc.todo.server.rest.resource;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import fr.neosoft.poc.todo.server.mongo.DBConnection;
@@ -7,13 +8,8 @@ import fr.neosoft.poc.todo.server.mongo.DBConnection;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -43,5 +39,11 @@ public class TodoResource {
     @GET
     public List<DBObject> findAll() {
         return todos.find().toArray();
+    }
+
+    @POST
+    public void create(String name) {
+        DBObject todo = new BasicDBObject("name", name).append("done", false);
+        todos.insert(todo);
     }
 }
