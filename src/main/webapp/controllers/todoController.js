@@ -24,8 +24,13 @@ angular.module('todoApp').controller('TodosListCtrl', ['$scope', '$http', 'TodoS
         });
     };
 
-    $scope.mark = function() {
-        // TODO: Update this method when Java EE6 backend will be done !
+    $scope.mark = function(todo) {
+        console.log(todo);
+        TodoServices.mark(todo._id, todo.done, function() {
+            refreshList();
+        }, function(error) {
+            console.log(error);
+        });
     };
 
     $scope.cleanup = function() {
