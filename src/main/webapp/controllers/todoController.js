@@ -25,11 +25,8 @@ angular.module('todoApp').controller('TodosListCtrl', ['$scope', '$http', 'TodoS
     };
 
     $scope.mark = function(todo) {
-        console.log(todo);
         TodoServices.mark(todo._id, todo.done, function() {
             refreshList();
-        }, function(error) {
-            console.log(error);
         });
     };
 
