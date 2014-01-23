@@ -13,7 +13,7 @@ angular.module('todoApp')
                 }).error(error);
 			},
 			mark: function(id, done, success, error) {
-                $http.post('api/v1/todos/' + id.$oid, done).success(function() {
+                $http.put('api/v1/todos/' + id.$oid, done).success(function() {
                     success();
                 }).error(error);
             }
