@@ -31,9 +31,8 @@ angular.module('todoApp').controller('TodosListCtrl', ['$scope', '$http', 'TodoS
     };
 
     $scope.cleanup = function() {
-        $scope.todos = _.filter($scope.todos, function(todo) {
-            return !todo.done;
+        TodoServices.cleanup(function() {
+            refreshList();
         });
-
     };
 }]);
