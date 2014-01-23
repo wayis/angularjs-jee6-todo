@@ -50,7 +50,7 @@
     </dependencies>
 
     <build>
-        <finalName>angularjs-jee6-todo</finalName>
+        <finalName>${artifactId}}</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
