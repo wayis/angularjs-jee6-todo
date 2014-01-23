@@ -50,7 +50,7 @@
     </dependencies>
 
     <build>
-        <finalName>${artifactId}}</finalName>
+        <finalName>${artifactId}</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -69,15 +69,23 @@
             <plugin>
                 <groupId>org.apache.openejb.maven</groupId>
                 <artifactId>tomee-maven-plugin</artifactId>
-                <version>1.0.1</version>
+                <version>1.6.1-SNAPSHOT</version>
                 <configuration>
-                    <tomeeVersion>1.6.0</tomeeVersion>
+                    <tomeeVersion>1.6.1-SNAPSHOT</tomeeVersion>
                     <tomeeClassifier>plus</tomeeClassifier>
                     <synchronization></synchronization>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>apache-snapshot</id>
+            <name>Apache Snapshot Repository</name>
+            <url>https://repository.apache.org/content/groups/snapshots/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <repositories>
         <repository>
