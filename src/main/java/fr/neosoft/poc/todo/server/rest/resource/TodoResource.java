@@ -3,7 +3,6 @@ package fr.neosoft.poc.todo.server.rest.resource;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
-import com.mongodb.WriteResult;
 import fr.neosoft.poc.todo.server.mongo.DBConnection;
 import org.bson.types.ObjectId;
 
@@ -56,5 +55,11 @@ public class TodoResource {
         DBObject valueToSet = new BasicDBObject("$set", new BasicDBObject("done", done));
 
         todos.update(searchQuery, valueToSet);
+    }
+
+    @DELETE
+    public void cleanup() {
+        DBObject searchQuery = new BasicDBObject("done", true);
+        todos.remove(searchQuery);
     }
 }
