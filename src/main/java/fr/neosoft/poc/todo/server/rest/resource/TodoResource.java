@@ -47,8 +47,9 @@ public class TodoResource {
         todos.insert(todo);
     }
 
+    @Path("{id}")
     @PUT
-    public void mark(String id, boolean done) {
+    public void mark(@PathParam("id") String id, boolean done) {
         DBObject searchQuery = new BasicDBObject("_id.$oid", id);
         DBObject valueToSet = new BasicDBObject("$set", new BasicDBObject("done", done));
 
