@@ -6,7 +6,7 @@ import com.mongodb.DBObject;
 import fr.neosoft.poc.todo.server.mongo.DBConnection;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by l.labbe on 22/01/14.
  */
-@Singleton
+@Stateless
 @Path("/todos")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -45,5 +45,13 @@ public class TodoResource {
     public void create(String name) {
         DBObject todo = new BasicDBObject("name", name).append("done", false);
         todos.insert(todo);
+    }
+
+    @PUT
+    public void mark(String id, boolean done) {
+        DBObject searchQuery = new BasicDBObject("_id.$oid", id);
+        DBObject valueToSet = new BasicDBObject("$set", new BasicDBObject("done", done));
+
+        todos.update(searchQuery, valueToSet);
     }
 }
