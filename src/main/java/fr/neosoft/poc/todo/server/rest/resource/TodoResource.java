@@ -3,7 +3,9 @@ package fr.neosoft.poc.todo.server.rest.resource;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
+import com.mongodb.WriteResult;
 import fr.neosoft.poc.todo.server.mongo.DBConnection;
+import org.bson.types.ObjectId;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -50,7 +52,7 @@ public class TodoResource {
     @Path("{id}")
     @PUT
     public void mark(@PathParam("id") String id, boolean done) {
-        DBObject searchQuery = new BasicDBObject("_id.$oid", id);
+        DBObject searchQuery = new BasicDBObject("_id", new ObjectId(id));
         DBObject valueToSet = new BasicDBObject("$set", new BasicDBObject("done", done));
 
         todos.update(searchQuery, valueToSet);
