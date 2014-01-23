@@ -11,6 +11,11 @@ angular.module('todoApp')
                 $http.post('api/v1/todos', name).success(function() {
                     success();
                 }).error(error);
-			}
+			},
+			mark: function(id, done, success, error) {
+                $http.post('api/v1/todos/' + id.$oid, done).success(function() {
+                    success();
+                }).error(error);
+            }
 		};
 	});
