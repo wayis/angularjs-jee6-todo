@@ -16,6 +16,11 @@ angular.module('todoApp')
                 $http.put('api/v1/todos/' + id.$oid, done).success(function() {
                     success();
                 }).error(error);
-            }
+            },
+            cleanup: function(success, error) {
+                 $http.delete('api/v1/todos/').success(function() {
+                     success();
+                 }).error(error);
+             }
 		};
 	});
